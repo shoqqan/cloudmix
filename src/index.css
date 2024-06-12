@@ -1,7 +1,10 @@
 @tailwind base;
   @tailwind components;
   @tailwind utilities;
-
+@font-face {
+	font-family: "inter";
+	src: url('./assets/fonts/inter.woff2');
+}
   @layer base {
     :root {
       --background: 0 0% 100%;

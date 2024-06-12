@@ -1,5 +1,5 @@
+import { setupStore } from '@/app/store.ts'
 import { firebaseConfig } from '@/shared/config/config.ts'
-import { store } from '@/store/store.ts'
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
@@ -10,8 +10,9 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './app'
 
 const app = initializeApp(firebaseConfig)
-const auth = getAuth(app)
-const firestore = getFirestore(app)
+const store = setupStore()
+export const auth = getAuth(app)
+export const firestore = getFirestore(app)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<Provider store={store}>
