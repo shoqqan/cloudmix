@@ -6,4 +6,6 @@ export enum AUTH {
 export interface FormValues {
 	email: string
 	password: string
+	fullName: string
+	secondPassword: string
 }
