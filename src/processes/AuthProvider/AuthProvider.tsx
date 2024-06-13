@@ -2,7 +2,6 @@ import { auth } from "@/main.tsx"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import type { ReactNode } from "react"
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 
 interface AuthContextProps {
 	isAuthenticated: boolean
@@ -21,27 +20,17 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
-	const navigate = useNavigate()
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (user) {
-				setIsAuthenticated(true)
-				navigate("/home")
-			} else {
-				setIsAuthenticated(false)
-				navigate("/login")
-			}
+			setIsAuthenticated(!!user)
 		})
 
 		return () => unsubscribe()
-	}, [navigate])
+	}, [])
 
 	const logout = () => {
-		signOut(auth).then(() => {
-			setIsAuthenticated(false)
-			navigate("/login")
-		})
+		signOut(auth).then(() => setIsAuthenticated(false))
 	}
 
 	return <AuthContext.Provider value={{ isAuthenticated, logout }}>{children}</AuthContext.Provider>
