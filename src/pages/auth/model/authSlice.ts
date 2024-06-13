@@ -1,7 +1,7 @@
-import { signIn, signUp } from '@/pages/auth/model/authSliceThunk.ts'
-import type { IAuthSlice } from '@/pages/auth/model/types.ts'
-import { showToast } from '@/shared/lib/toaster.ts'
-import { createSlice } from '@reduxjs/toolkit'
+import { signIn, signUp } from "@/pages/auth/model/authSliceThunk.ts"
+import type { IAuthSlice } from "@/pages/auth/model/types.ts"
+import { showToast } from "@/shared/lib/toaster.ts"
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState: IAuthSlice = {
 	isLoading: false,
@@ -10,34 +10,34 @@ const initialState: IAuthSlice = {
 }
 
 const authSlice = createSlice({
-	name: 'auth',
+	name: "auth",
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(signUp.pending, (state, action) => {
+			.addCase(signUp.pending, (state) => {
 				state.isLoading = true
 			})
 			.addCase(signUp.fulfilled, (state, action) => {
 				state.isAuthenticated = true
 				state.userInfo = action.payload
 				state.isLoading = false
-				showToast('Successefully registered')
+				showToast("Successefully registered")
 			})
-			.addCase(signUp.rejected, (state, action) => {
+			.addCase(signUp.rejected, (state) => {
 				state.isLoading = false
 			})
 
-			.addCase(signIn.pending, (state, action) => {
+			.addCase(signIn.pending, (state) => {
 				state.isLoading = true
 			})
 			.addCase(signIn.fulfilled, (state, action) => {
 				state.isAuthenticated = true
 				state.userInfo = action.payload
 				state.isLoading = false
-				showToast('Successefully authenthificated')
+				showToast("Successefully authenthificated")
 			})
-			.addCase(signIn.rejected, (state, action) => {
+			.addCase(signIn.rejected, (state) => {
 				state.isLoading = false
 			})
 	},

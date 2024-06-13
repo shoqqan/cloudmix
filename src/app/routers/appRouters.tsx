@@ -17,6 +17,7 @@ export const AppRouters = () => {
 				</Route>
 				<Route element={<ProtectedRoute />}>
 					<Route path={ROUTES.CHAT} element={<Home />} />
+					<Route path={"/"} />
 				</Route>
 			</Routes>
 		</AuthProvider>
