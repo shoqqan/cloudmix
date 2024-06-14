@@ -1,5 +1,6 @@
 import { setChats } from "@/entities/userchats/model/userchatsSlice.ts"
 import { SidebarItem } from "@/features/sidebar/sidebarItem"
+import { SidebarSearchItem } from "@/features/sidebar/sidebarSearchItem"
 import { SidebarSearchUsersInput } from "@/features/sidebar/sidebarSearchUsersInput"
 import { firestore } from "@/main.tsx"
 import { useAppDispatch, useAppSelector } from "@/shared/hooks"
@@ -43,23 +44,27 @@ export const Sidebar = () => {
 			{searchedUsers &&
 				searchedUsers.map((user) => {
 					const key = `search${user.uid}`
-					return (
-						<SidebarItem key={key} uid={user.uid} name={user.username} lastMessage={""} time={""} newMessages={0} />
-					)
+					return <SidebarSearchItem key={key} uid={user.uid} name={user.username} />
 				})}
-			<div
-				className={
-					"w-full px-5 py-6 flex justify-between items-end border-b border-b-[#ccd5da] text-xl font-bold bg-[#FBFBFB]"
-				}
-			>
-				Messages(3)
-			</div>
-			{chats.map((chat) => {
-				console.log(chat)
-				const id = chat[0]
-				const user = chat[1].userInfo
-				return <SidebarItem key={id} uid={user.uid} name={user.username} lastMessage={""} time={""} newMessages={0} />
-			})}
+			{chats && (
+				<>
+					<div
+						className={
+							"w-full px-5 py-6 flex justify-between items-end border-b border-b-[#ccd5da] text-xl font-bold bg-[#FBFBFB]"
+						}
+					>
+						Messages({chats.length})
+					</div>
+					{chats.map((chat) => {
+						console.log(chat)
+						const id = chat[0]
+						const user = chat[1].userInfo
+						return (
+							<SidebarItem key={id} uid={user.uid} name={user.username} lastMessage={""} time={""} newMessages={0} />
+						)
+					})}
+				</>
+			)}
 		</div>
 	)
 }
