@@ -15,7 +15,7 @@ export const Chat = () => {
 				<h2 className={"font-bold text-lg"}>Aslan</h2>
 				<p className={"text-[#8B8594]"}>Online</p>
 			</div>
-			<div className={"flex-1 bg-[#FBFBFB] overflow-y-auto px-5 py-3"}>
+			<div className={"flex-1 flex flex-col justify-end gap-6 bg-[#FBFBFB] overflow-y-auto p-10"}>
 				{messages.map((message, index) => (
 					<Message key={index} content={message.content} isCurrentUser={message.isCurrentUser} />
 				))}

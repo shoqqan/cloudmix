@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import React from "react"
 
 interface MessageProps {
@@ -6,12 +7,11 @@ interface MessageProps {
 }
 
 export const Message: React.FC<MessageProps> = ({ content, isCurrentUser }) => {
-	const isCurrentUserStyles = `max-w-xs md:max-w-md lg:max-w-lg px-4 py-2 rounded-lg my-2 ${
-		isCurrentUser ? "bg-[#7e57c2] text-white self-end" : "bg-white text-black self-start"
-	}`
 	return (
-		<div className={isCurrentUserStyles} style={{ wordBreak: "break-word" }}>
-			{content}
+		<div className={clsx("w-full flex", { "justify-end": isCurrentUser })} style={{ wordBreak: "break-word" }}>
+			<div className={clsx("bg-white px-6 py-3 rounded-lg text-black", { "bg-[#9969ff] text-white": isCurrentUser })}>
+				{content}
+			</div>
 		</div>
 	)
 }

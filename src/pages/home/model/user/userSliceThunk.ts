@@ -1,5 +1,5 @@
 import { firestore } from "@/main.tsx"
-import { IUser } from "@/pages/home/model/types.ts"
+import type { IUser } from "@/pages/home/model/user/types.ts"
 import { showErrorToast } from "@/shared/lib/toaster.ts"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { doc, getDoc } from "firebase/firestore"

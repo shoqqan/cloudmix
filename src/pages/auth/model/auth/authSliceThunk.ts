@@ -1,5 +1,6 @@
 import { auth, firestore } from "@/main.tsx"
-import { IUser, ROLES } from "@/pages/home/model/types.ts"
+import type { IUser } from "@/pages/home/model/user/types.ts"
+import { ROLES } from "@/pages/home/model/user/types.ts"
 import { getUserInfo } from "@/pages/home/model/user/userSliceThunk.ts"
 import { showErrorToast } from "@/shared/lib/toaster.ts"
 import { createAsyncThunk } from "@reduxjs/toolkit"
@@ -33,6 +34,7 @@ export const signUp = createAsyncThunk(
 				createdAt: new Date().toISOString(),
 			}
 			await setDoc(doc(firestore, "users", user.uid), userData)
+			await setDoc(doc(firestore, "userChats", user.uid), {})
 			return userData
 		} catch (error) {
 			showErrorToast(error.message)

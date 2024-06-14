@@ -1,7 +1,7 @@
 import { Chat } from "@/entities/chat/chat.tsx"
 import { Header } from "@/entities/header/header.tsx"
 import { Sidebar } from "@/entities/sidebar/ui/sidebar.tsx"
-import { useAppSelector } from "@/shared/lib/redux.ts"
+import { useAppSelector } from "@/shared/hooks/useAppSelector.ts"
 
 export const Home = () => {
 	const user = useAppSelector((state) => state.userReducer.userInfo)

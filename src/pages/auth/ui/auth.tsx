@@ -1,6 +1,6 @@
-/* eslint-disable */
 import { signIn, signUp } from "@/pages/auth/model/auth/authSliceThunk.ts"
-import { useAppDispatch, useAppSelector } from "@/shared/lib/redux.ts"
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts"
+import { useAppSelector } from "@/shared/hooks/useAppSelector.ts"
 import { authSchema, registerSchema } from "@/shared/lib/validators.ts"
 import { AUTH } from "@/shared/types/authTypes.ts"
 import { Button } from "@/shared/ui/button.tsx"
@@ -21,7 +21,7 @@ export const Auth: FC<IAuthProps> = ({ type }) => {
 			type,
 			fullName: "",
 			email: "shoqqan@gmail.com",
-			password: "777",
+			password: "123456",
 			secondPassword: "",
 		},
 		validationSchema: type === AUTH.LOGIN ? authSchema : registerSchema,

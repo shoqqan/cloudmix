@@ -1,5 +1,5 @@
 import { signIn, signUp } from "@/pages/auth/model/auth/authSliceThunk.ts"
-import type { IAuthSlice } from "@/pages/auth/model/types.ts"
+import type { IAuthSlice } from "@/pages/auth/model/auth/types.ts"
 import { getUserInfo } from "@/pages/home/model/user/userSliceThunk.ts"
 import { showToast } from "@/shared/lib/toaster.ts"
 import { createSlice } from "@reduxjs/toolkit"

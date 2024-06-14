@@ -1,6 +1,6 @@
 import { Logo } from "@/entities/logo/Logo.tsx"
 import { useAuth } from "@/processes/authProvider/AuthProvider.tsx"
-import { useAppSelector } from "@/shared/lib/redux.ts"
+import { useAppSelector } from "@/shared/hooks/useAppSelector.ts"
 import { Button } from "@/shared/ui/button.tsx"
 
 export const Header = () => {
@@ -8,7 +8,7 @@ export const Header = () => {
 	const { userInfo } = useAppSelector((state) => state.userReducer)
 	console.log(userInfo)
 	return (
-		<header className={"w-full h-32 py-2 px-10 flex justify-between items-center border-b border-b-[#ccd5da]"}>
+		<header className={"w-full h-32 py-2 px-10 flex justify-between items-center"}>
 			<Logo />
 			{userInfo && (
 				<div className={"flex flex-col items-end text-[#180A29]"}>
