@@ -1,19 +1,18 @@
+import { Chat } from "@/entities/chat/chat.tsx"
 import { Header } from "@/entities/header/header.tsx"
-import { useAuth } from "@/processes/AuthProvider/AuthProvider.tsx"
-import { Button } from "@/shared/ui/button.tsx"
+import { Sidebar } from "@/entities/sidebar/ui/sidebar.tsx"
+import { useAppSelector } from "@/shared/lib/redux.ts"
 
 export const Home = () => {
-	const { logout } = useAuth()
+	const user = useAppSelector((state) => state.userReducer.userInfo)
+	console.log(user)
 	return (
 		<article className={"w-screen h-screen flex flex-col"}>
 			<Header />
-			<Button
-				onClick={() => {
-					logout()
-				}}
-			>
-				Logout
-			</Button>
+			<main className={"w-full h-full flex"}>
+				<Sidebar />
+				<Chat />
+			</main>
 		</article>
 	)
 }

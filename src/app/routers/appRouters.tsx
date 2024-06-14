@@ -1,6 +1,6 @@
 import { Auth } from "@/pages/auth"
 import { Home } from "@/pages/home"
-import { AuthProvider } from "@/processes/AuthProvider/AuthProvider.tsx"
+import { AuthProvider } from "@/processes/authProvider/AuthProvider.tsx"
 import { ProtectedRoute } from "@/processes/protectedRoute/protectedRoute.tsx"
 import { PublicRoute } from "@/processes/publicRoute/publicRoute.tsx"
 import { ROUTES } from "@/shared/lib/routes.ts"

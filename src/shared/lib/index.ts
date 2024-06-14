@@ -1,1 +1,1 @@
-export { validate } from './validators.ts'
+export * as validators from "./validators.ts"

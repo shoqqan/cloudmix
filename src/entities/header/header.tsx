@@ -1,12 +1,29 @@
 import { Logo } from "@/entities/logo/Logo.tsx"
+import { useAuth } from "@/processes/authProvider/AuthProvider.tsx"
 import { useAppSelector } from "@/shared/lib/redux.ts"
+import { Button } from "@/shared/ui/button.tsx"
 
 export const Header = () => {
-	const store = useAppSelector((state) => state.authReducer)
-	console.log(store)
+	const { logout } = useAuth()
+	const { userInfo } = useAppSelector((state) => state.userReducer)
+	console.log(userInfo)
 	return (
-		<header className={"w-full h-32 py-2 px-10 bg-amber-200 flex justify-between"}>
+		<header className={"w-full h-32 py-2 px-10 flex justify-between items-center border-b border-b-[#ccd5da]"}>
 			<Logo />
+			{userInfo && (
+				<div className={"flex flex-col items-end text-[#180A29]"}>
+					<h2 className={"text-2xl font-bold"}>{userInfo.username}</h2>
+					<Button
+						className={"text-lg text-[#8b8594] font-medium  p-0"}
+						variant={"link"}
+						onClick={() => {
+							logout()
+						}}
+					>
+						Logout
+					</Button>
+				</div>
+			)}
 		</header>
 	)
 }
