@@ -1,7 +1,7 @@
+import type { IUser } from "@/entities/user/model/types.ts"
+import { ROLES } from "@/entities/user/model/types.ts"
+import { getUserInfo } from "@/entities/user/model/userSliceThunk.ts"
 import { auth, firestore } from "@/main.tsx"
-import type { IUser } from "@/pages/home/model/user/types.ts"
-import { ROLES } from "@/pages/home/model/user/types.ts"
-import { getUserInfo } from "@/pages/home/model/user/userSliceThunk.ts"
 import { showErrorToast } from "@/shared/lib/toaster.ts"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import {

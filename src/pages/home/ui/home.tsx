@@ -1,11 +1,8 @@
-import { Chat } from "@/entities/chat/chat.tsx"
-import { Header } from "@/entities/header/header.tsx"
-import { Sidebar } from "@/entities/sidebar/ui/sidebar.tsx"
-import { useAppSelector } from "@/shared/hooks/useAppSelector.ts"
+import { Chat } from "@/features/chat"
+import { Sidebar } from "@/features/sidebar"
+import { Header } from "@/widgets/header"
 
 export const Home = () => {
-	const user = useAppSelector((state) => state.userReducer.userInfo)
-	console.log(user)
 	return (
 		<article className={"w-screen h-screen flex flex-col"}>
 			<Header />

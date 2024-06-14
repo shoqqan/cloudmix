@@ -1,10 +1,8 @@
 import { signIn, signUp } from "@/pages/auth/model/auth/authSliceThunk.ts"
-import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts"
-import { useAppSelector } from "@/shared/hooks/useAppSelector.ts"
-import { authSchema, registerSchema } from "@/shared/lib/validators.ts"
-import { AUTH } from "@/shared/types/authTypes.ts"
-import { Button } from "@/shared/ui/button.tsx"
-import { Input } from "@/shared/ui/input.tsx"
+import { useAppDispatch, useAppSelector } from "@/shared/hooks"
+import { validators } from "@/shared/lib"
+import { AUTH } from "@/shared/types"
+import { Button, Input } from "@/shared/ui"
 import { useFormik } from "formik"
 import type { FC } from "react"
 import { Link } from "react-router-dom"
@@ -24,7 +22,7 @@ export const Auth: FC<IAuthProps> = ({ type }) => {
 			password: "123456",
 			secondPassword: "",
 		},
-		validationSchema: type === AUTH.LOGIN ? authSchema : registerSchema,
+		validationSchema: type === AUTH.LOGIN ? validators.authSchema : validators.registerSchema,
 		onSubmit: async ({ email, password, fullName }) => {
 			if (type === AUTH.REGISTER) {
 				dispatch(signUp({ email, password, username: fullName }))

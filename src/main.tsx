@@ -1,5 +1,5 @@
 import { setupStore } from "@/app/store.ts"
-import { firebaseConfig } from "@/shared/config/config.ts"
+import { firebaseConfig } from "@/shared/config"
 import { initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"

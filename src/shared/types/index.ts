@@ -1,1 +1,2 @@
-export { type IInputProps } from './inputTypes.ts'
+export { type IInputProps } from "./inputTypes.ts"
+export { AUTH } from "./authTypes.ts"

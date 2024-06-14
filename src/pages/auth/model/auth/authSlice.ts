@@ -1,7 +1,7 @@
+import { getUserInfo } from "@/entities/user/model/userSliceThunk.ts"
 import { signIn, signUp } from "@/pages/auth/model/auth/authSliceThunk.ts"
 import type { IAuthSlice } from "@/pages/auth/model/auth/types.ts"
-import { getUserInfo } from "@/pages/home/model/user/userSliceThunk.ts"
-import { showToast } from "@/shared/lib/toaster.ts"
+import { toasters } from "@/shared/lib"
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState: IAuthSlice = {
@@ -16,7 +16,7 @@ const authSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(signUp.fulfilled, () => {
-				showToast("Successefully registered")
+				toasters.showToast("Successefully registered")
 			})
 			.addCase(signIn.pending, (state) => {
 				state.isLoading = true
@@ -25,7 +25,7 @@ const authSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(getUserInfo.fulfilled, (state) => {
-				showToast("Successefully Logged In")
+				toasters.showToast("Successefully Logged In")
 				state.isLoading = false
 			})
 	},

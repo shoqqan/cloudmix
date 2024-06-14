@@ -1,5 +1,4 @@
-import { Button } from "@/shared/ui/button.tsx"
-import { Input } from "@/shared/ui/input.tsx"
+import { Button, Input } from "@/shared/ui"
 
 export function InputWithButton() {
 	return (
