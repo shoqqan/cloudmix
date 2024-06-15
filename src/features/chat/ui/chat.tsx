@@ -1,45 +1,35 @@
-import { setMessages } from "@/entities/chats"
+import { ChatHeader } from "@/features/chat/chatHeader"
 import { ChatInput } from "@/features/chat/chatInput"
-import { firestore } from "@/main.tsx"
 import { useAppSelector } from "@/shared/hooks"
 import { Messages } from "@/widgets/messages"
-import { doc, onSnapshot } from "firebase/firestore"
-import { FC, useEffect } from "react"
-import { useDispatch } from "react-redux"
+import clsx from "clsx"
+import { FC } from "react"
 
 export const Chat: FC = () => {
-	const { user, chatId, messages } = useAppSelector((state) => state.chatsReducer)
-	const dispatch = useDispatch()
-	console.log("messages", messages)
-	useEffect(() => {
-		if (chatId) {
-			console.log("chatId:", chatId) // Проверка вывода chatId в консоль
-			const chatDocRef = doc(firestore, "chats", chatId)
-			const unsub = onSnapshot(chatDocRef, (doc) => {
-				if (doc.exists()) {
-					const data = doc.data()
-					if (data) {
-						dispatch(setMessages(data.messages))
-					}
-				} else {
-					console.error("Document does not exist")
-				}
-			})
-
-			return () => {
-				unsub()
-			}
-		}
-	}, [chatId, dispatch])
-
+	const { user } = useAppSelector((state) => state.chatsReducer)
+	const { isSelected } = useAppSelector((state) => state.chatsReducer)
+	console.log(user)
 	return (
-		<div className="w-full h-full flex flex-col">
-			<div className="h-20 py-5 px-5 border-b border-b-[#ccd5da] flex flex-col justify-center">
-				<h2 className="font-bold text-lg">{user.username}</h2>
-				<p className="text-[#8B8594]">Online</p>
-			</div>
-			<Messages messages={messages} />
-			<ChatInput />
+		<div
+			className={clsx("w-full transition-all h-full flex flex-col justify-between", {
+				"lg:visible lg:w-full": isSelected,
+				"lg:invisible lg:w-0": !isSelected,
+			})}
+		>
+			{!user && (
+				<div className={"w-full h-full flex justify-center py-32"}>
+					<div className={"w-fit h-fit bg-purple-800 text-white px-2 py-1 opacity-60 rounded-lg"}>
+						Select chat to start messaging
+					</div>
+				</div>
+			)}
+			{user && (
+				<>
+					<ChatHeader username={user.username} isOnline={true} />
+					<Messages />
+					<ChatInput />
+				</>
+			)}
 		</div>
 	)
 }

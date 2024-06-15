@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import React from "react"
+import React, { useEffect, useRef } from "react"
 
 interface MessageProps {
 	content: string
@@ -7,12 +7,20 @@ interface MessageProps {
 }
 
 export const Message: React.FC<MessageProps> = ({ content, isCurrentUser }) => {
-	console.log(content)
+	const ref = useRef<HTMLDivElement>(null)
+	useEffect(() => {
+		ref.current?.scrollIntoView({ behavior: "smooth" })
+	}, [content])
 	return (
-		<div className={clsx("w-full flex", { "justify-end": isCurrentUser })} style={{ wordBreak: "break-word" }}>
+		<div
+			ref={ref}
+			className={clsx("w-full flex", { "justify-end": isCurrentUser })}
+			style={{ wordBreak: "break-word" }}
+		>
 			<div
-				className={clsx("bg-white px-6 py-3 rounded-lg text-black", {
-					"bg-purple-700 text-white": isCurrentUser,
+				className={clsx("px-6 py-3 rounded-lg", {
+					"bg-purple-900 text-white": isCurrentUser,
+					"bg-white text-black": !isCurrentUser,
 				})}
 			>
 				{content}

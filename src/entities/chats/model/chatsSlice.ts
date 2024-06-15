@@ -1,11 +1,13 @@
+import { IChatsSlice } from "@/entities/chats"
 import { getUserInfo } from "@/entities/user/model/userSliceThunk.ts"
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+const initialState: IChatsSlice = {
 	chatId: "",
-	user: {},
-	currentUser: {},
+	user: null,
+	currentUser: null,
 	messages: [],
+	isSelected: false,
 }
 
 const chatsSlice = createSlice({
@@ -13,14 +15,18 @@ const chatsSlice = createSlice({
 	initialState,
 	reducers: {
 		updateConversation(state, action) {
-			state.user = action.payload
-			console.log("currentUser: ", state.currentUser.uid)
-			console.log("user: ", action.payload.uid)
-			state.chatId =
-				state.currentUser.uid > action.payload.uid
-					? state.currentUser.uid + action.payload.uid
-					: action.payload.uid + state.currentUser.uid
-			console.log(state.chatId)
+			if (state.currentUser && action.payload) {
+				console.log("here")
+				state.user = action.payload
+				state.chatId =
+					state.currentUser.uid > action.payload.uid
+						? state.currentUser.uid + action.payload.uid
+						: action.payload.uid + state.currentUser.uid
+				state.isSelected = true
+			}
+		},
+		setIsSelected(state, action) {
+			state.isSelected = action.payload
 		},
 		setMessages(state, action) {
 			state.messages = action.payload
@@ -32,5 +38,5 @@ const chatsSlice = createSlice({
 		})
 	},
 })
-export const { updateConversation, setMessages } = chatsSlice.actions
+export const { updateConversation, setMessages, setIsSelected } = chatsSlice.actions
 export default chatsSlice.reducer

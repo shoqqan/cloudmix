@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 interface IUserChatsSlice {
 	searchedUsers: IUser[]
-	chats: any[]
+	chats: any[] //TODO
 }
 
 const initialState: IUserChatsSlice = {
@@ -21,7 +21,6 @@ const userchatsSlice = createSlice({
 			state.searchedUsers = []
 		},
 		setChats(state, action) {
-			console.log(action.payload)
 			state.chats = action.payload
 		},
 	},

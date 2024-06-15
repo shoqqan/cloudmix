@@ -5,18 +5,19 @@ interface IInputWithButtonProps {
 	setText: (text: string) => void
 	text: string
 	onSubmit: () => void
+	placeholder: string
 }
 
-export function InputWithButton({ disabled, setText, onSubmit, text }: IInputWithButtonProps) {
+export function InputWithButton({ placeholder, disabled, setText, onSubmit, text }: IInputWithButtonProps) {
 	return (
-		<div className="flex w-full items-center space-x-2">
+		<div className="flex w-full items-center space-x-2 h-1/6">
 			<Input
 				type="email"
 				onChange={(event) => {
 					setText(event.target.value)
 				}}
 				value={text}
-				placeholder="Email"
+				placeholder={placeholder}
 			/>
 			<Button
 				type="button"

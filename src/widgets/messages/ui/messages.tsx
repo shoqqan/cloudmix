@@ -1,22 +1,37 @@
-import { useAppSelector } from "@/shared/hooks"
+import { setMessages } from "@/entities/chats"
+import { firestore } from "@/main.tsx"
+import { useAppDispatch, useAppSelector } from "@/shared/hooks"
+import { convertTimestampToTime } from "@/shared/lib/utils.ts"
 import { Message } from "@/shared/ui"
-import { FC } from "react"
+import { doc, onSnapshot } from "firebase/firestore"
+import { useEffect } from "react"
 
-interface IMessagesProps {
-	messages: any[]
-}
-
-export const Messages: FC<IMessagesProps> = ({ messages }) => {
-	// const messages = [
-	// 	{ content: "Yo Samurai, me and pokemon head will going to Dostyk, will u join?", isCurrentUser: false },
-	// 	{ content: "Okay what exactly we're doing there?", isCurrentUser: true },
-	// 	{ content: "First of all, could we have a snack at Memo's", isCurrentUser: true },
-	// 	{ content: "We'll have to look for a gift for Alina", isCurrentUser: false },
-	// 	{ content: "Ok cool", isCurrentUser: false },
-	// ]
+export const Messages = () => {
 	const { userInfo } = useAppSelector((state) => state.userReducer)
+	const { messages, chatId } = useAppSelector((state) => state.chatsReducer)
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		if (chatId) {
+			const chatDocRef = doc(firestore, "chats", chatId)
+			const unsub = onSnapshot(chatDocRef, (doc) => {
+				if (doc.exists()) {
+					const data = doc.data()
+					if (data) {
+						dispatch(setMessages(data.messages.map((el) => ({ ...el, date: convertTimestampToTime(el.date.seconds) }))))
+					}
+				} else {
+					console.error("Document does not exist")
+				}
+			})
+
+			return () => {
+				unsub()
+			}
+		} else return
+	}, [chatId, dispatch])
 	return (
-		<div className={"flex-1 flex flex-col justify-end gap-6 bg-[#FBFBFB] overflow-y-auto p-10"}>
+		<div className={"h-96 grow flex flex-col gap-6 bg-[#FBFBFB] overflow-y-scroll p-10"}>
 			{messages.map((message, index) => (
 				<Message key={index} content={message.text} isCurrentUser={message.senderId === userInfo.uid} />
 			))}

@@ -1,9 +1,8 @@
 import { updateConversation } from "@/entities/chats"
-import { useAppDispatch, useAppSelector } from "@/shared/hooks"
+import { useAppDispatch } from "@/shared/hooks"
 import type { FC } from "react"
 
 interface ISidebarItemProps {
-	uid: string
 	name: string
 	lastMessage: string
 	time: string
@@ -11,8 +10,7 @@ interface ISidebarItemProps {
 	user: any
 }
 
-export const SidebarItem: FC<ISidebarItemProps> = ({ uid, user, newMessages, lastMessage, time, name }) => {
-	const currentUser = useAppSelector((state) => state.userReducer.userInfo)
+export const SidebarItem: FC<ISidebarItemProps> = ({ user, newMessages, lastMessage, time, name }) => {
 	const dispatch = useAppDispatch()
 	const handleSelect = () => {
 		dispatch(updateConversation(user))
