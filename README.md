@@ -21,7 +21,7 @@ This keeps a balance between following the DRY principle and adaptation possibil
   <li>Cloud Database</li>
 </ul>
 <hr>
-🌐 Live Demo: <a href='https://cloudmix-demo.vercel.app/'>Live Demo</a>
+🌐 Live Demo: <a href='https://cloudmix.vercel.app/#/welcome'>Live Demo</a>
 <h3>Build with:</h3>
 » <a href='https://www.typescriptlang.org/'>TypeScript</a> <br>
 » <a href='https://react.dev/'>ReactTS</a> <br>
