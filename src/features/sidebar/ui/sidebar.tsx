@@ -67,11 +67,10 @@ export const Sidebar = () => {
 						const id = chat[0]
 						const chatInfo = chat[1]
 						const user = chat[1].userInfo
-						console.log(user)
-						console.log(chatInfo)
 						return (
 							<SidebarItem
 								key={id}
+								id={id}
 								user={user}
 								name={user.username}
 								lastMessage={chatInfo.lastMessage ? chatInfo.lastMessage.text : ""}

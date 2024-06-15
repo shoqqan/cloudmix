@@ -11,16 +11,16 @@ interface IChatHeaderProps {
 export const ChatHeader: FC<IChatHeaderProps> = ({ isOnline, username }) => {
 	const dispatch = useAppDispatch()
 	return (
-		<div className={"h-20 py-5 px-5 flex gap-x-3"}>
+		<div className={"h-20 py-5 px-5 flex gap-x-3 border-b border-b-[#ccd5da]"}>
 			<img
 				src={back}
-				className={"w-7"}
+				className={"w-7 hidden lg:block"}
 				alt={"go back"}
 				onClick={() => {
 					dispatch(setIsSelected(false))
 				}}
 			/>
-			<div className=" border-b border-b-[#ccd5da] flex flex-col justify-center">
+			<div className="flex flex-col justify-center">
 				<h2 className="font-bold text-lg">{username}</h2>
 				<p className="text-[#8B8594]">{isOnline ? "Online" : "Offline"}</p>
 			</div>

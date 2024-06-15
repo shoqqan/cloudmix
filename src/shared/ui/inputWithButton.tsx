@@ -16,6 +16,11 @@ export function InputWithButton({ placeholder, disabled, setText, onSubmit, text
 				onChange={(event) => {
 					setText(event.target.value)
 				}}
+				onKeyDown={(event) => {
+					if (event.key === "Enter") {
+						onSubmit()
+					}
+				}}
 				value={text}
 				placeholder={placeholder}
 			/>

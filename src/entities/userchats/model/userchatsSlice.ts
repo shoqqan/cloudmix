@@ -1,11 +1,12 @@
 import type { IUser } from "@/entities/user/model/types.ts"
+import { MessageArray } from "@/entities/userchats"
 import { searchUsers } from "@/entities/userchats/model/sidebarSliceThunk.ts"
 import type { PayloadAction } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit"
 
 interface IUserChatsSlice {
 	searchedUsers: IUser[]
-	chats: any[] //TODO
+	chats: MessageArray
 }
 
 const initialState: IUserChatsSlice = {
