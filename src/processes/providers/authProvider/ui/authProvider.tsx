@@ -1,8 +1,8 @@
-import type { IUser } from "@/entities/user/model/types.ts"
-import { getUserInfo } from "@/entities/user/model/userSliceThunk.ts"
-import { auth } from "@/main.tsx"
+import type { IUser } from "@/entities/user/model/types"
+import { getUserInfo } from "@/entities/user/model/userSliceThunk"
+import { auth } from "@/main"
 import { useAppDispatch, useAppSelector } from "@/shared/hooks"
-import { signOut } from "firebase/auth"
+import { onAuthStateChanged, signOut } from "firebase/auth"
 import type { ReactNode } from "react"
 import React, { createContext, useContext, useEffect, useState } from "react"
 
@@ -16,27 +16,33 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined)
 export const useAuth = () => {
 	const context = useContext(AuthContext)
 	if (!context) {
-		throw new Error("useAuth must be used within an authProvider")
+		throw new Error("useAuth must be used within an AuthProvider")
 	}
 	return context
 }
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-	const [currentUser, setCurrentUser] = useState(null)
+	const [currentUser, setCurrentUser] = useState<IUser | null>(null)
 	const { isLoading } = useAppSelector((state) => state.authReducer)
 	const dispatch = useAppDispatch()
+
 	useEffect(() => {
-		auth.onAuthStateChanged((user) => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				setCurrentUser(user)
+				setCurrentUser(user as IUser)
 				dispatch(getUserInfo(user.uid))
+			} else {
+				setCurrentUser(null)
 			}
 		})
-	}, [])
+
+		return () => unsubscribe()
+	}, [dispatch])
 
 	if (isLoading) {
 		return <>Loading...</>
 	}
+
 	const logout = () => {
 		signOut(auth).then(() => setCurrentUser(null))
 	}
