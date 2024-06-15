@@ -14,11 +14,10 @@ interface ISidebarItemProps {
 
 export const SidebarItem: FC<ISidebarItemProps> = ({ id, user, newMessages, lastMessage, time, name }) => {
 	const dispatch = useAppDispatch()
-	const { chatId, isSelected } = useAppSelector((state) => state.chatsReducer)
+	const { chatId } = useAppSelector((state) => state.chatsReducer)
 	const handleSelect = () => {
 		dispatch(updateConversation(user))
 	}
-	console.log(chatId, id)
 	return (
 		<div
 			className={clsx(
