@@ -1,5 +1,6 @@
 import { Auth } from "@/pages/auth"
 import { Home } from "@/pages/home"
+import { Welcome } from "@/pages/welcome"
 import { ProtectedRoute } from "@/processes/hocs/protectedRoute"
 import { PublicRoute } from "@/processes/hocs/publicRoute"
 import { AuthProvider } from "@/processes/providers/authProvider"
@@ -19,6 +20,7 @@ export const AppRouters = () => {
 					<Route path={ROUTES.CHAT} element={<Home />} />
 					<Route path={"/"} />
 				</Route>
+				<Route path={ROUTES.WELCOME} element={<Welcome />} />
 			</Routes>
 		</AuthProvider>
 	)
