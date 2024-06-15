@@ -73,10 +73,9 @@ export const Sidebar = () => {
 							<SidebarItem
 								key={id}
 								user={user}
-								uid={user.uid}
 								name={user.username}
 								lastMessage={chatInfo.lastMessage ? chatInfo.lastMessage.text : ""}
-								time={"10:44"}
+								time={chatInfo.date}
 								newMessages={0}
 							/>
 						)

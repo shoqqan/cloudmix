@@ -1,1 +1,1 @@
-export { firebaseConfig } from "./config.ts"
+export { firebaseConfig, persistConfig } from "./config.ts"
