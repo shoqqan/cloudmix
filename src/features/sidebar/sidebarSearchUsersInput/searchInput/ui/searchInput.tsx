@@ -20,7 +20,7 @@ export const SearchInput: FC<ISearchInput> = ({ inputValue, setInputValue, setIs
 		/>
 		<Button
 			onClick={() => setIsFocused(false)}
-			className={clsx("bg-purple-800 transition-all hidden", {
+			className={clsx("bg-purple-800 transition-all hidden lg:block", {
 				"lg:w-20 lg:opacity-100 lg:visible": isFocused,
 				"lg:w-0 lg:opacity-0 lg:invisible": !isFocused,
 			})}
