@@ -38,7 +38,7 @@ export const Auth: FC<IAuthProps> = ({ type }) => {
 				{type === AUTH.REGISTER && (
 					<>
 						<Input
-							label={"Full Name"}
+							label={"username"}
 							className={`px-2 py-2 border rounded-lg transition-all ${
 								formik.touched.fullName && formik.errors.fullName && "border-red-500"
 							}`}
@@ -46,7 +46,7 @@ export const Auth: FC<IAuthProps> = ({ type }) => {
 							value={formik.values.fullName}
 							onChange={formik.handleChange}
 							id="fullName"
-							placeholder="John Doe"
+							placeholder="shoqqan"
 							type="text"
 						/>
 						{formik.errors.fullName && <p className={"text-red-500"}>{formik.errors.fullName}</p>}
