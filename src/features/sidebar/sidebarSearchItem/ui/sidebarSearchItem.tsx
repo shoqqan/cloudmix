@@ -1,7 +1,7 @@
 import { firestore } from "@/main.tsx"
 import { useAppSelector } from "@/shared/hooks"
 import { showErrorToast } from "@/shared/lib/toaster.ts"
-import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore"
+import { doc, getDoc, setDoc, Timestamp, updateDoc } from "firebase/firestore"
 import type { FC } from "react"
 
 interface ISidebarItemProps {
@@ -28,14 +28,14 @@ export const SidebarSearchItem: FC<ISidebarItemProps> = ({ uid, name }) => {
 									uid: uid,
 									username: name,
 								},
-								[combinedId + ".date"]: serverTimestamp(),
+								[combinedId + ".date"]: Timestamp.now(),
 							})
 							await updateDoc(doc(firestore, "userChats", uid), {
 								[combinedId + ".userInfo"]: {
 									uid: user.uid,
 									username: user.username,
 								},
-								[combinedId + ".date"]: serverTimestamp(),
+								[combinedId + ".date"]: Timestamp.now(),
 							})
 						}
 					} catch (error) {

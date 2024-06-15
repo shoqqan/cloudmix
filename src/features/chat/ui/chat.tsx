@@ -1,28 +1,45 @@
-import { InputWithButton, Message } from "@/shared/ui"
+import { setMessages } from "@/entities/chats"
+import { ChatInput } from "@/features/chat/chatInput"
+import { firestore } from "@/main.tsx"
+import { useAppSelector } from "@/shared/hooks"
+import { Messages } from "@/widgets/messages"
+import { doc, onSnapshot } from "firebase/firestore"
+import { FC, useEffect } from "react"
+import { useDispatch } from "react-redux"
 
-export const Chat = () => {
-	const messages = [
-		{ content: "Yo Samurai, me and pokemon head will going to Dostyk, will u join?", isCurrentUser: false },
-		{ content: "Okay what exactly we're doing there?", isCurrentUser: true },
-		{ content: "First of all, could we have a snack at Memo's", isCurrentUser: true },
-		{ content: "We'll have to look for a gift for Alina", isCurrentUser: false },
-		{ content: "Ok cool", isCurrentUser: false },
-	]
+export const Chat: FC = () => {
+	const { user, chatId, messages } = useAppSelector((state) => state.chatsReducer)
+	const dispatch = useDispatch()
+	console.log("messages", messages)
+	useEffect(() => {
+		if (chatId) {
+			console.log("chatId:", chatId) // Проверка вывода chatId в консоль
+			const chatDocRef = doc(firestore, "chats", chatId)
+			const unsub = onSnapshot(chatDocRef, (doc) => {
+				if (doc.exists()) {
+					const data = doc.data()
+					if (data) {
+						dispatch(setMessages(data.messages))
+					}
+				} else {
+					console.error("Document does not exist")
+				}
+			})
+
+			return () => {
+				unsub()
+			}
+		}
+	}, [chatId, dispatch])
 
 	return (
-		<div className={"w-full h-full flex flex-col"}>
-			<div className={"h-20 py-5 px-5 border-b border-b-[#ccd5da] flex flex-col justify-center"}>
-				<h2 className={"font-bold text-lg"}>Aslan</h2>
-				<p className={"text-[#8B8594]"}>Online</p>
+		<div className="w-full h-full flex flex-col">
+			<div className="h-20 py-5 px-5 border-b border-b-[#ccd5da] flex flex-col justify-center">
+				<h2 className="font-bold text-lg">{user.username}</h2>
+				<p className="text-[#8B8594]">Online</p>
 			</div>
-			<div className={"flex-1 flex flex-col justify-end gap-6 bg-[#FBFBFB] overflow-y-auto p-10"}>
-				{messages.map((message, index) => (
-					<Message key={index} content={message.content} isCurrentUser={message.isCurrentUser} />
-				))}
-			</div>
-			<div className={"h-20 bg-[#FBFBFB] border-t border-t-[#ccd5da] px-5 flex justify-center items-center"}>
-				<InputWithButton />
-			</div>
+			<Messages messages={messages} />
+			<ChatInput />
 		</div>
 	)
 }

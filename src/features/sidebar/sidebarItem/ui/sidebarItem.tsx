@@ -1,7 +1,5 @@
-import { firestore } from "@/main.tsx"
-import { useAppSelector } from "@/shared/hooks"
-import { showErrorToast } from "@/shared/lib/toaster.ts"
-import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore"
+import { updateConversation } from "@/entities/chats"
+import { useAppDispatch, useAppSelector } from "@/shared/hooks"
 import type { FC } from "react"
 
 interface ISidebarItemProps {
@@ -10,41 +8,19 @@ interface ISidebarItemProps {
 	lastMessage: string
 	time: string
 	newMessages: number
+	user: any
 }
 
-export const SidebarItem: FC<ISidebarItemProps> = ({ uid, newMessages, lastMessage, time, name }) => {
-	const user = useAppSelector((state) => state.userReducer.userInfo)
+export const SidebarItem: FC<ISidebarItemProps> = ({ uid, user, newMessages, lastMessage, time, name }) => {
+	const currentUser = useAppSelector((state) => state.userReducer.userInfo)
+	const dispatch = useAppDispatch()
+	const handleSelect = () => {
+		dispatch(updateConversation(user))
+	}
 	return (
 		<div
 			className={"w-full px-5 py-6 flex justify-between items-end border-b border-b-[#ccd5da]"}
-			onClick={async () => {
-				if (user) {
-					const combinedId = user.uid > uid ? user.uid + uid : uid + user.uid
-					try {
-						const chat = await getDoc(doc(firestore, "chats", combinedId))
-						if (!chat.exists()) {
-							await setDoc(doc(firestore, "chats", combinedId), { messages: [] })
-							await updateDoc(doc(firestore, "userChats", user.uid), {
-								[combinedId + ".userInfo"]: {
-									uid: uid,
-									username: name,
-								},
-								[combinedId + ".date"]: serverTimestamp(),
-							})
-							await updateDoc(doc(firestore, "userChats", uid), {
-								[combinedId + ".userInfo"]: {
-									uid: user.uid,
-									username: user.username,
-								},
-								[combinedId + ".date"]: serverTimestamp(),
-							})
-						}
-					} catch (error) {
-						showErrorToast(error.message)
-					}
-					//
-				}
-			}}
+			onClick={handleSelect}
 		>
 			<div className={"flex flex-col gap-2"}>
 				<h1 className={"font-bold text-lg"}>{name}</h1>
