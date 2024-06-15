@@ -20,7 +20,7 @@ export const Message: React.FC<MessageProps> = ({ content, isCurrentUser }) => {
 			<div
 				className={clsx("px-6 py-3 rounded-lg", {
 					"bg-purple-900 text-white": isCurrentUser,
-					"bg-white text-black": !isCurrentUser,
+					"bg-white border border-gray-200 text-black": !isCurrentUser,
 				})}
 			>
 				{content}

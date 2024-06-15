@@ -16,7 +16,7 @@ export const useChatMessages = (chatId: string | null) => {
 			if (docSnapshot.exists()) {
 				const chatData = docSnapshot.data()
 				if (chatData) {
-					const formattedMessages = chatData.messages.map((message) => ({
+					const formattedMessages = chatData.messages.map((message: { date: { seconds: number } }) => ({
 						...message,
 						date: convertTimestampToTime(message.date.seconds),
 					}))

@@ -18,10 +18,11 @@ export const SidebarItem: FC<ISidebarItemProps> = ({ id, user, newMessages, last
 	const handleSelect = () => {
 		dispatch(updateConversation(user))
 	}
+
 	return (
 		<div
 			className={clsx(
-				"w-full px-5 py-6 bg-white transition-all flex justify-between items-end border-b border-b-[#ccd5da] lg:bg-white",
+				"w-full px-5 py-6 transition-all flex justify-between items-end border-b border-b-[#ccd5da] lg:bg-white",
 				{
 					"bg-purple-100": chatId === id,
 				},

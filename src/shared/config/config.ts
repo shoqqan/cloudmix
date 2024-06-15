@@ -1,4 +1,4 @@
-import storage from "redux-persist/lib/storage"
+import storage from "redux-persist/lib/storage/session"
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyAUiZeXuH8R8ms93aqUiNkes6I2OKasGR0",
