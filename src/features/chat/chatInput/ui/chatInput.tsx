@@ -9,9 +9,10 @@ export const ChatInput = () => {
 	const [text, setText] = useState("")
 	const [isDisabled, setIsDisabled] = useState(false)
 	const handleSend = async () => {
+		setText("")
 		setIsDisabled(true)
 		try {
-			await handleSendMessage(chatId, text, currentUser, user, setText)
+			await handleSendMessage(chatId, text, currentUser, user)
 			setIsDisabled(false)
 		} catch (error) {
 			toasters.showErrorToast(error)

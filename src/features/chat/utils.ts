@@ -24,18 +24,10 @@ const updateUserChats = async (chatId: string, text: string, userId: string) => 
 	await updateDoc(doc(firestore, "userChats", userId), lastMessage)
 }
 
-export const handleSendMessage = async (
-	chatId: string,
-	text: string,
-	currentUser: any,
-	user: any,
-	setText: (text: string) => void,
-) => {
+export const handleSendMessage = async (chatId: string, text: string, currentUser: any, user: any) => {
 	if (!currentUser || !user) return
 
 	await updateChatMessages(chatId, text, currentUser.uid)
 	await updateUserChats(chatId, text, currentUser.uid)
 	await updateUserChats(chatId, text, user.uid)
-
-	setText("")
 }

@@ -19,13 +19,13 @@ export const useChats = (userInfo: IUser | null) => {
 			(docSnapshot) => {
 				if (docSnapshot.exists()) {
 					const chatData = Object.entries(docSnapshot.data())
+						.sort((a, b) => b[1].date - a[1].date)
 						.map(([key, value]: [string, any]) => {
 							if (value.date && value.date.seconds) {
 								value.date = convertTimestampToTime(value.date.seconds)
 							}
 							return [key, value]
 						})
-						.sort((a, b) => b[1].date - a[1].date)
 
 					dispatch(setChats(chatData))
 				} else {
