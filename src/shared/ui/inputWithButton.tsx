@@ -12,7 +12,7 @@ export function InputWithButton({ placeholder, disabled, setText, onSubmit, text
 	return (
 		<div className="flex w-full items-center space-x-2 h-1/6">
 			<Input
-				type="email"
+				type="text"
 				onChange={(event) => {
 					setText(event.target.value)
 				}}
