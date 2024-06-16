@@ -4,9 +4,9 @@ import { Header } from "@/widgets/header"
 
 export const Home = () => {
 	return (
-		<article className={"w-screen h-screen flex flex-col"}>
+		<article className={"w-screen h-screen overflow-hidden flex flex-col"}>
 			<Header />
-			<main className={"w-full h-full flex"}>
+			<main className={"w-full h-full overflow-hidden flex"}>
 				<Sidebar />
 				<Chat />
 			</main>

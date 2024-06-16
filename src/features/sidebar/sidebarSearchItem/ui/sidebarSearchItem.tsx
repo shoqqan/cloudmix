@@ -21,14 +21,12 @@ export const SidebarSearchItem: FC<ISidebarItemProps> = ({ uid, name }) => {
 	}
 	return (
 		<div
-			className={`w-full px-5 py-6 flex justify-between items-end border-b border-b-[#ccd5da] ${
+			className={`w-full px-5 py-6 flex justify-between rounded-lg transition-all items-end border-b border-b-[#ccd5da] hover:bg-purple-300 hover:text-white ${
 				uid === user!.uid ? "hidden" : "block"
 			}`}
 			onClick={handleClick}
 		>
-			<div className={"flex flex-col gap-2 bg-[#ccd5da] px-4 py-1 rounded-md"}>
-				<h1 className={"font-bold text-lg"}>{name}</h1>
-			</div>
+			<h1 className={"font-bold text-lg"}>{name}</h1>
 		</div>
 	)
 }

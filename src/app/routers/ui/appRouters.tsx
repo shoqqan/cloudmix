@@ -6,7 +6,7 @@ import { PublicRoute } from "@/processes/hocs/publicRoute"
 import { AuthProvider } from "@/processes/providers/authProvider"
 import { ROUTES } from "@/shared/lib"
 import { AUTH } from "@/shared/types"
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 
 export const AppRouters = () => {
 	return (
@@ -18,9 +18,9 @@ export const AppRouters = () => {
 				</Route>
 				<Route element={<ProtectedRoute />}>
 					<Route path={ROUTES.CHAT} element={<Home />} />
-					<Route path={"/"} />
 				</Route>
 				<Route path={ROUTES.WELCOME} element={<Welcome />} />
+				<Route path={"/"} element={<Navigate to={ROUTES.WELCOME} />} />
 			</Routes>
 		</AuthProvider>
 	)
