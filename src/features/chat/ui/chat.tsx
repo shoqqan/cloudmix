@@ -5,8 +5,7 @@ import clsx from "clsx"
 import { FC } from "react"
 
 export const Chat: FC = () => {
-	const { user, isSelected, chatId } = useAppSelector((state) => state.chatsReducer)
-	console.log(chatId)
+	const { user, isSelected } = useAppSelector((state) => state.chatsReducer)
 	return (
 		<div
 			className={clsx("w-full transition-all h-full flex flex-col justify-between", {

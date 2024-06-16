@@ -29,6 +29,18 @@ export const Sidebar: FC = () => {
 					>
 						Messages({chats.length})
 					</div>
+					<SidebarItem
+						key={"chatgptid"}
+						id={"chatgptid"}
+						user={{
+							username: "CloudGPT",
+							uid: "chatgptid",
+						}}
+						name={"CloudGPT"}
+						lastMessage={"Lets talk wit AI!"}
+						time={"Try it now"}
+						newMessages={1}
+					/>
 					{chats.map((chat) => {
 						const id = chat[0]
 						const chatInfo = chat[1]
