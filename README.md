@@ -26,7 +26,7 @@ This keeps a balance between following the DRY principle and adaptation possibil
 » <a href='https://www.typescriptlang.org/'>TypeScript</a> <br>
 » <a href='https://react.dev/'>ReactTS</a> <br>
 » <a href='https://feature-sliced.design/'>Feature-Sliced Design Architecture</a> <br>
-» <a href='https://effector.dev/'>RTK</a> <br>
+» <a href='https://redux-toolkit.js.org/'>RTK</a> <br>
 » <a href='https://tailwindcss.com/'>TailwindCSS</a> <br>
 » <a href='https://firebase.google.com/'>Firebase</a> <br>
 
