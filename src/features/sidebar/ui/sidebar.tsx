@@ -14,7 +14,7 @@ export const Sidebar: FC = () => {
 
 	return (
 		<div
-			className={clsx("w-[30rem] h-full flex transition-all flex-col border-r border-r-[#ccd5da]", {
+			className={clsx("w-[30rem] h-full flex transition-all flex-col overflow-y-scroll border-r border-r-[#ccd5da]", {
 				"lg:invisible lg:w-0": isSelected,
 				"lg:visible lg:w-full": !isSelected,
 			})}
