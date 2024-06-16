@@ -30,4 +30,12 @@ This keeps a balance between following the DRY principle and adaptation possibil
 » <a href='https://tailwindcss.com/'>TailwindCSS</a> <br>
 » <a href='https://firebase.google.com/'>Firebase</a> <br>
 
-BUILT WITH GAZIZS BOILERPLATEREACT + JEST + COMMITLINT + ESLINT
+<hr>
+
+<h3>How To Start In localhost</h3>
+» git clone ...
+» npm i
+» npm run dev
+
+
+BUILT WITH GAZIZS BOILERPLATE REACT + JEST + COMMITLINT + ESLINT - deprecated
