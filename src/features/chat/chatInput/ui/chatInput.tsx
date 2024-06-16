@@ -1,21 +1,25 @@
-import { handleSendMessage } from "@/features/chat"
-import { useAppSelector } from "@/shared/hooks"
+import { sendMessage } from "@/features/chat/utils.ts"
+import { useAppDispatch, useAppSelector } from "@/shared/hooks"
 import { toasters } from "@/shared/lib"
 import { InputWithButton } from "@/shared/ui"
 import { useState } from "react"
 
 export const ChatInput = () => {
-	const { chatId, currentUser, user } = useAppSelector((state) => state.chatsReducer)
+	const dispatch = useAppDispatch()
+	const { chatId, currentUser, user, messages } = useAppSelector((state) => state.chatsReducer)
 	const [text, setText] = useState("")
 	const [isDisabled, setIsDisabled] = useState(false)
 	const handleSend = async () => {
-		setText("")
-		setIsDisabled(true)
-		try {
-			await handleSendMessage(chatId, text, currentUser, user)
-			setIsDisabled(false)
-		} catch (error) {
-			toasters.showErrorToast(error)
+		if (user && currentUser) {
+			setText("")
+			setIsDisabled(true)
+			try {
+				await sendMessage(chatId, text, currentUser, user, dispatch, messages)
+				setIsDisabled(false)
+			} catch (error) {
+				toasters.showErrorToast(error)
+				setIsDisabled(false)
+			}
 		}
 	}
 	return (

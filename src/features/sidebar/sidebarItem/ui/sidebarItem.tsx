@@ -1,4 +1,5 @@
 import { updateConversation } from "@/entities/chats"
+import { IUser } from "@/entities/user"
 import { useAppDispatch, useAppSelector } from "@/shared/hooks"
 import clsx from "clsx"
 import type { FC } from "react"
@@ -8,7 +9,7 @@ interface ISidebarItemProps {
 	lastMessage: string
 	time: string
 	newMessages: number
-	user: any
+	user: Partial<IUser>
 	id: string
 }
 

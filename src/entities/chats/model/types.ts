@@ -13,4 +13,5 @@ export interface IChatsSlice {
 	currentUser: IUser | null
 	messages: IMessage[]
 	isSelected: boolean
+	isGPTLoading: boolean
 }
