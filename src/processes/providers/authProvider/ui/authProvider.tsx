@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 	if (isLoading) {
 		return (
 			<div className={"w-screen h-screen flex justify-center items-center"}>
-				<div className="w-12 h-12 rounded-full animate-spin border-8 border-dashed border-green-500 border-t-transparent"></div>
+				<div className="w-12 h-12 rounded-full animate-spin border-8 border-dashed border-[#9969FF] border-t-transparent"></div>
 			</div>
 		)
 	}
