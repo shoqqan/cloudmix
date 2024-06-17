@@ -6,7 +6,7 @@ export const authSchema = Yup.object().shape({
 })
 
 export const registerSchema = Yup.object().shape({
-	fullName: Yup.string().required("Full name is required"),
+	fullName: Yup.string().required("username is required"),
 	email: Yup.string().email("Invalid email address").required("Email is required"),
 	password: Yup.string().min(6, "Password must be at least 6 characters long").required("Password is required"),
 	secondPassword: Yup.string()

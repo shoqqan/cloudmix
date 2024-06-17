@@ -27,7 +27,7 @@ export const Sidebar: FC = () => {
 							"w-full px-5 py-6 flex justify-between items-end border-b border-b-[#ccd5da] text-xl font-bold bg-[#FBFBFB]"
 						}
 					>
-						Messages({chats.length})
+						Messages({chats.length + 1})
 					</div>
 					<SidebarItem
 						key={"chatgptid"}
