@@ -47,6 +47,7 @@ const chatsSlice = createSlice({
 			})
 			.addCase(getMessagesFromGPT.pending, (state) => {
 				state.isGPTLoading = true
+				state.messages = []
 			})
 			.addCase(getMessagesFromGPT.fulfilled, (state, action) => {
 				state.isGPTLoading = false
