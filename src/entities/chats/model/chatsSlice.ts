@@ -29,8 +29,8 @@ const chatsSlice = createSlice({
 						state.currentUser.uid > action.payload.uid
 							? state.currentUser.uid + action.payload.uid
 							: action.payload.uid + state.currentUser.uid
-					state.isSelected = true
 				}
+				state.isSelected = true
 			}
 		},
 		setIsSelected(state, action) {

@@ -9,7 +9,6 @@ export const Sidebar: FC = () => {
 	const { isSelected } = useAppSelector((state) => state.chatsReducer)
 	const userInfo = useAppSelector((state) => state.userReducer.userInfo)
 	const [isFocused, setIsFocused] = useState(false)
-
 	useChats(userInfo)
 
 	return (
