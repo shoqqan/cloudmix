@@ -8,7 +8,7 @@ export const getMessagesFromGPT = createAsyncThunk(
 	"chats/getMessagesFromBot",
 	async (uid: string): Promise<IMessage[]> => {
 		try {
-			const response = await axios.get(`http://195.49.210.50:7676/messages/${uid}`)
+			const response = await axios.get(`https://chatgpt-fastapi-x1qh.onrender.com/messages/${uid}`)
 			const messagesData = await response.data
 			return messagesData.map((el) => ({
 				date: "20:20",
@@ -27,7 +27,7 @@ export const sendMessageToGPT = createAsyncThunk(
 	"chats/sendMessageToBot",
 	async ({ username, message }: { username: string; message: string }): Promise<string> => {
 		try {
-			const response = await axios.post("http://195.49.210.50:7676/send-message", {
+			const response = await axios.post("https://chatgpt-fastapi-x1qh.onrender.com/send-message", {
 				user: username,
 				message,
 			})

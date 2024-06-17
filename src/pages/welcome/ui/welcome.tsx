@@ -14,7 +14,7 @@ export const Welcome = () => {
 					<div className={"flex flex-col gap-5 lg:justify-center lg:items-center"}>
 						<p className={`text-gray-800 text-3xl leading-normal lg:text-center`}>
 							<strong>
-								Welcome to Cloud<span className={"text-purple-500"}>Mix</span>.
+								Welcome to Cloud<span className={"text-purple-500"}>Mix</span>
 							</strong>
 						</p>
 						<Link
