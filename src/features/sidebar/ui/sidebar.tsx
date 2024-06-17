@@ -20,28 +20,29 @@ export const Sidebar: FC = () => {
 			})}
 		>
 			<SidebarSearchUsersInput isFocused={isFocused} setIsFocused={setIsFocused} />
-			{chats && (
-				<div className={`transition-all ${isFocused ? "collapse hidden" : "visible block"}`}>
-					<div
-						className={
-							"w-full px-5 py-6 flex justify-between items-end border-b border-b-[#ccd5da] text-xl font-bold bg-[#FBFBFB]"
-						}
-					>
-						Messages({chats.length + 1})
-					</div>
-					<SidebarItem
-						key={"chatgptid"}
-						id={"chatgptid"}
-						user={{
-							username: "CloudGPT",
-							uid: "chatgptid",
-						}}
-						name={"CloudGPT"}
-						lastMessage={"Lets talk wit AI!"}
-						time={"Try it now"}
-						newMessages={1}
-					/>
-					{chats.map((chat) => {
+
+			<div className={`transition-all ${isFocused ? "collapse hidden" : "visible block"}`}>
+				<div
+					className={
+						"w-full px-5 py-6 flex justify-between items-end border-b border-b-[#ccd5da] text-xl font-bold bg-[#FBFBFB]"
+					}
+				>
+					Messages({chats.length + 1})
+				</div>
+				<SidebarItem
+					key={"chatgptid"}
+					id={"chatgptid"}
+					user={{
+						username: "CloudGPT",
+						uid: "chatgptid",
+					}}
+					name={"CloudGPT"}
+					lastMessage={"Lets talk wit AI!"}
+					time={"Try it now"}
+					newMessages={1}
+				/>
+				{chats &&
+					chats.map((chat) => {
 						const id = chat[0]
 						const chatInfo = chat[1]
 						const user = chatInfo.userInfo
@@ -57,8 +58,7 @@ export const Sidebar: FC = () => {
 							/>
 						)
 					})}
-				</div>
-			)}
+			</div>
 		</div>
 	)
 }
