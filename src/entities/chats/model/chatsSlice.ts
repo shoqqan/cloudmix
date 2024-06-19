@@ -3,6 +3,7 @@ import { sendMessageToGPT } from "@/entities/chats/model/chatsSliceThunk.ts"
 import { getUserInfo } from "@/entities/user/model/userSliceThunk.ts"
 import { toasters } from "@/shared/lib"
 import { createSlice } from "@reduxjs/toolkit"
+import { PURGE } from "redux-persist"
 import { v4 as uuid } from "uuid"
 
 const initialState: IChatsSlice = {
@@ -50,8 +51,10 @@ const chatsSlice = createSlice({
 				state.messages = []
 			})
 			.addCase(getMessagesFromGPT.fulfilled, (state, action) => {
-				state.isGPTLoading = false
-				state.messages = action.payload
+				if (state.chatId === "chatgptid") {
+					state.isGPTLoading = false
+					state.messages = action.payload
+				}
 			})
 			.addCase(getMessagesFromGPT.rejected, (state) => {
 				state.isGPTLoading = false
@@ -67,6 +70,9 @@ const chatsSlice = createSlice({
 					date: Date.now(),
 				}
 				state.messages.push(newMessage)
+			})
+			.addCase(PURGE, () => {
+				return initialState
 			})
 	},
 })

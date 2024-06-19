@@ -17,7 +17,7 @@ export function InputWithButton({ placeholder, disabled, setText, onSubmit, text
 					setText(event.target.value)
 				}}
 				onKeyDown={(event) => {
-					if (event.key === "Enter") {
+					if (event.key === "Enter" && text.trim().length!==0) {
 						onSubmit()
 					}
 				}}

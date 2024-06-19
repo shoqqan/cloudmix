@@ -1,6 +1,6 @@
 import type { IUser } from "@/entities/user/model/types"
 import { getUserInfo } from "@/entities/user/model/userSliceThunk"
-import { auth } from "@/main"
+import { auth, persistor } from "@/main"
 import { useAppDispatch, useAppSelector } from "@/shared/hooks"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import type { ReactNode } from "react"
@@ -49,6 +49,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
 	const logout = () => {
 		signOut(auth).then(() => setCurrentUser(null))
+		persistor.purge()
 	}
 
 	return <AuthContext.Provider value={{ currentUser, logout }}>{children}</AuthContext.Provider>

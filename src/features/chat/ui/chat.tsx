@@ -6,6 +6,7 @@ import { FC } from "react"
 
 export const Chat: FC = () => {
 	const { user, isSelected } = useAppSelector((state) => state.chatsReducer)
+
 	return (
 		<div
 			className={clsx("w-full transition-all h-full flex flex-col justify-between", {
@@ -13,7 +14,7 @@ export const Chat: FC = () => {
 				"lg:invisible lg:w-0": !isSelected,
 			})}
 		>
-			{user ? <ChatContent username={user.username} isOnline={true} /> : <EmptyChatMessage />}
+			{user ? <ChatContent username={user.username} isOnline={user.isOnline} /> : <EmptyChatMessage />}
 		</div>
 	)
 }

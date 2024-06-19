@@ -10,7 +10,7 @@ interface ISearchedUserList {
 export const SearchedUsersList: FC<ISearchedUserList> = ({ users, isFocused }) => (
 	<div className={`transition-all duration-500 ${isFocused ? "opacity-100" : "opacity-0"}`}>
 		{users.map((user) => (
-			<SidebarSearchItem key={`search${user.uid}`} uid={user.uid} name={user.username} />
+			<SidebarSearchItem key={`search${user.uid}`} searchedUser={user} />
 		))}
 	</div>
 )

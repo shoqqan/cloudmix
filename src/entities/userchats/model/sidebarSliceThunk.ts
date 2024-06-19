@@ -12,6 +12,7 @@ export const searchUsers = createAsyncThunk("userchats/search-users", async (use
 			return []
 		} else {
 			const users = querySnapshot.docs.map((doc) => doc.data())
+			console.log(users)
 			return users
 		}
 	} catch (error) {

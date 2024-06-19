@@ -1,2 +1,2 @@
 export { Chat } from "./ui/chat.tsx"
-export { handleSendMessage } from "./utils.ts"
+export { handleSendMessage, changeOnlineStatus } from "./utils.ts"
