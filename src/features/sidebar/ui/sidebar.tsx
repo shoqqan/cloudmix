@@ -10,7 +10,6 @@ export const Sidebar: FC = () => {
 	const userInfo = useAppSelector((state) => state.userReducer.userInfo)
 	const [isFocused, setIsFocused] = useState(false)
 	useChats(userInfo)
-
 	return (
 		<div
 			className={clsx("w-[30rem] h-full flex transition-all flex-col overflow-y-scroll border-r border-r-[#ccd5da]", {

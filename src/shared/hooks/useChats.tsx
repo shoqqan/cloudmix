@@ -1,4 +1,4 @@
-import { IUser } from "@/entities/user"
+import { type IUser } from "@/entities/user"
 import { setChats } from "@/entities/userchats/model/userchatsSlice"
 import { firestore } from "@/main"
 import { useAppDispatch } from "@/shared/hooks"
@@ -26,7 +26,6 @@ export const useChats = (userInfo: IUser | null) => {
 							}
 							return [key, value]
 						})
-
 					dispatch(setChats(chatData))
 				} else {
 					console.error("No such document!")

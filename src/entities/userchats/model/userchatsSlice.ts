@@ -3,6 +3,7 @@ import { MessageArray } from "@/entities/userchats"
 import { searchUsers } from "@/entities/userchats/model/sidebarSliceThunk.ts"
 import type { PayloadAction } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit"
+import { PURGE } from "redux-persist"
 
 interface IUserChatsSlice {
 	searchedUsers: IUser[]
@@ -26,9 +27,13 @@ const userchatsSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(searchUsers.fulfilled, (state, action: PayloadAction<any[]>) => {
-			state.searchedUsers = action.payload
-		})
+		builder
+			.addCase(searchUsers.fulfilled, (state, action: PayloadAction<any[]>) => {
+				state.searchedUsers = action.payload
+			})
+			.addCase(PURGE, () => {
+				return initialState
+			})
 	},
 })
 

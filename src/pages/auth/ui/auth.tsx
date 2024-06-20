@@ -18,8 +18,8 @@ export const Auth: FC<IAuthProps> = ({ type }) => {
 		initialValues: {
 			type,
 			fullName: "",
-			email: "shoqqan@gmail.com",
-			password: "123456",
+			email: "",
+			password: "",
 			secondPassword: "",
 		},
 		validationSchema: type === AUTH.LOGIN ? validators.authSchema : validators.registerSchema,

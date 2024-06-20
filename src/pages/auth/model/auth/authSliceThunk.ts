@@ -30,7 +30,7 @@ export const signUp = createAsyncThunk(
 				username: username,
 				password: password,
 				role: ROLES.USER,
-				isOnline: true,
+				isOnline: false,
 				createdAt: new Date().toISOString(),
 			}
 			await setDoc(doc(firestore, "users", user.uid), userData)
@@ -47,7 +47,6 @@ export const signIn = createAsyncThunk(
 	"auth/signin",
 	async ({ email, password }: Pick<UserData, "email" | "password">, { dispatch }) => {
 		try {
-			setPersistence(auth, browserSessionPersistence)
 			const userCredential = await signInWithEmailAndPassword(auth, email, password)
 			const user = userCredential.user
 			dispatch(getUserInfo(user.uid))

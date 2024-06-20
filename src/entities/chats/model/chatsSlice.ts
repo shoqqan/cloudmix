@@ -1,8 +1,10 @@
-import { getMessagesFromGPT, IChatsSlice, IMessage } from "@/entities/chats"
+import type { IChatsSlice, IMessage } from "@/entities/chats"
+import { getMessagesFromGPT } from "@/entities/chats"
 import { sendMessageToGPT } from "@/entities/chats/model/chatsSliceThunk.ts"
 import { getUserInfo } from "@/entities/user/model/userSliceThunk.ts"
 import { toasters } from "@/shared/lib"
 import { createSlice } from "@reduxjs/toolkit"
+import { PURGE } from "redux-persist"
 import { v4 as uuid } from "uuid"
 
 const initialState: IChatsSlice = {
@@ -39,6 +41,9 @@ const chatsSlice = createSlice({
 		setMessages(state, action) {
 			state.messages = action.payload
 		},
+		setUser(state, action) {
+			state.user = action.payload
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -50,8 +55,10 @@ const chatsSlice = createSlice({
 				state.messages = []
 			})
 			.addCase(getMessagesFromGPT.fulfilled, (state, action) => {
-				state.isGPTLoading = false
-				state.messages = action.payload
+				if (state.chatId === "chatgptid") {
+					state.isGPTLoading = false
+					state.messages = action.payload
+				}
 			})
 			.addCase(getMessagesFromGPT.rejected, (state) => {
 				state.isGPTLoading = false
@@ -68,7 +75,10 @@ const chatsSlice = createSlice({
 				}
 				state.messages.push(newMessage)
 			})
+			.addCase(PURGE, () => {
+				return initialState
+			})
 	},
 })
-export const { updateConversation, setMessages, setIsSelected } = chatsSlice.actions
+export const { setUser, updateConversation, setMessages, setIsSelected } = chatsSlice.actions
 export default chatsSlice.reducer

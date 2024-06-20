@@ -3,6 +3,7 @@ import { signIn, signUp } from "@/pages/auth/model/auth/authSliceThunk.ts"
 import type { IAuthSlice } from "@/pages/auth/model/auth/types.ts"
 import { toasters } from "@/shared/lib"
 import { createSlice } from "@reduxjs/toolkit"
+import { PURGE } from "redux-persist"
 
 const initialState: IAuthSlice = {
 	isLoading: false,
@@ -27,6 +28,9 @@ const authSlice = createSlice({
 			.addCase(getUserInfo.fulfilled, (state) => {
 				toasters.showToast("Successefully Logged In")
 				state.isLoading = false
+			})
+			.addCase(PURGE, () => {
+				return initialState
 			})
 	},
 })
