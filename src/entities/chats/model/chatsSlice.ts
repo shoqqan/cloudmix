@@ -1,4 +1,5 @@
-import { getMessagesFromGPT, IChatsSlice, IMessage } from "@/entities/chats"
+import type { IChatsSlice, IMessage } from "@/entities/chats"
+import { getMessagesFromGPT } from "@/entities/chats"
 import { sendMessageToGPT } from "@/entities/chats/model/chatsSliceThunk.ts"
 import { getUserInfo } from "@/entities/user/model/userSliceThunk.ts"
 import { toasters } from "@/shared/lib"
@@ -40,6 +41,9 @@ const chatsSlice = createSlice({
 		setMessages(state, action) {
 			state.messages = action.payload
 		},
+		setUser(state, action) {
+			state.user = action.payload
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -76,5 +80,5 @@ const chatsSlice = createSlice({
 			})
 	},
 })
-export const { updateConversation, setMessages, setIsSelected } = chatsSlice.actions
+export const { setUser, updateConversation, setMessages, setIsSelected } = chatsSlice.actions
 export default chatsSlice.reducer
