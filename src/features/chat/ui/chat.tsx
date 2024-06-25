@@ -1,6 +1,7 @@
 import { ChatContent } from "@/features/chat/chatContent"
 import { EmptyChatMessage } from "@/features/chat/emptyChatMessage"
-import { useAppSelector, useChatinfo } from "@/shared/hooks"
+import { useChatinfo } from "@/hooks"
+import { useAppSelector } from "@/shared/hooks"
 import clsx from "clsx"
 import { type FC } from "react"
 

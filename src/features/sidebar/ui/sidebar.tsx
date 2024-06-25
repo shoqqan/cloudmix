@@ -1,6 +1,7 @@
 import { SidebarItem } from "@/features/sidebar/sidebarItem"
 import { SidebarSearchUsersInput } from "@/features/sidebar/sidebarSearchUsersInput"
-import { useAppSelector, useChats } from "@/shared/hooks"
+import { useChats } from "@/hooks"
+import { useAppSelector } from "@/shared/hooks"
 import clsx from "clsx"
 import { FC, useState } from "react"
 

@@ -4,12 +4,12 @@ import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts"
 import { useAppSelector } from "@/shared/hooks/useAppSelector.ts"
 import { convertTimestampToTime } from "@/shared/lib/utils.ts"
 import { doc, onSnapshot } from "firebase/firestore"
-import { useEffect } from "react"
+import { useLayoutEffect } from "react"
 
 export const useChatMessages = (chatId: string | null) => {
 	const dispatch = useAppDispatch()
 	const { userInfo } = useAppSelector((state) => state.userReducer)
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (!chatId) return
 		if (chatId !== "chatgptid") {
 			const chatDocRef = doc(firestore, "chats", chatId)
@@ -33,5 +33,5 @@ export const useChatMessages = (chatId: string | null) => {
 			if (!userInfo) return
 			dispatch(getMessagesFromGPT(userInfo.username))
 		}
-	}, [chatId, dispatch])
+	}, [chatId, dispatch, userInfo])
 }
