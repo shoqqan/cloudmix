@@ -5,17 +5,7 @@ import { sendMessageToGPT } from "@/entities/chats/model/chatsSliceThunk.ts"
 import type { IUser } from "@/entities/user"
 import { firestore } from "@/main.tsx"
 import { toasters } from "@/shared/lib"
-import {
-	arrayUnion,
-	collection,
-	doc,
-	getDocs,
-	query,
-	Timestamp,
-	updateDoc,
-	where,
-	writeBatch,
-} from "firebase/firestore"
+import { arrayUnion, collection, doc, getDocs, Timestamp, updateDoc, writeBatch } from "firebase/firestore"
 import { v4 as uuid } from "uuid"
 
 const updateChatMessages = async (chatId: string, text: string, senderId: string) => {
@@ -80,30 +70,24 @@ export const changeOnlineStatus = async (userId: string, isOnline: boolean) => {
 	const userChatsCollectionRef = collection(firestore, "userChats")
 
 	try {
-		// Обновляем статус пользователя в коллекции users
 		await updateDoc(userDocRef, {
 			isOnline,
 		})
 
-		// Получаем все документы из коллекции userChats
 		const querySnapshot = await getDocs(userChatsCollectionRef)
 
-		// Проверка на наличие документов
 		if (querySnapshot.empty) {
 			console.log(`No documents found in userChats collection`)
 			return
 		}
 
-		// Создаем пакетное обновление
 		const batch = writeBatch(firestore)
 
-		// Проходим по всем документам и обновляем поле isOnline
 		querySnapshot.forEach((docSnapshot) => {
 			const userChatsData = docSnapshot.data()
 			const updates = {}
 
 			for (const [key, value] of Object.entries(userChatsData)) {
-				console.log(value)
 				if (value?.userInfo?.uid === userId) {
 					updates[`${key}.userInfo.isOnline`] = isOnline
 				}
@@ -115,7 +99,6 @@ export const changeOnlineStatus = async (userId: string, isOnline: boolean) => {
 			}
 		})
 
-		// Выполняем пакетное обновление
 		await batch.commit()
 		console.log("User online status updated successfully")
 	} catch (err) {

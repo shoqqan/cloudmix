@@ -1,13 +1,13 @@
 import storage from "redux-persist/lib/storage/session"
 
 export const firebaseConfig = {
-	apiKey: "AIzaSyAUiZeXuH8R8ms93aqUiNkes6I2OKasGR0",
-	authDomain: "messenger-6119d.firebaseapp.com",
-	projectId: "messenger-6119d",
-	storageBucket: "messenger-6119d.appspot.com",
-	messagingSenderId: "979459921266",
-	appId: "1:979459921266:web:4e6e9b8385d00b8915b9eb",
-	measurementId: "G-MYEFR6PEPS",
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_FIREBASE_APP_ID,
+	measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 }
 
 export const persistConfig = {
