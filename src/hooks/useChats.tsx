@@ -1,8 +1,8 @@
 import { type IUser } from "@/entities/user"
-import { setChats } from "@/entities/userchats/model/userchatsSlice"
-import { firestore } from "@/main"
+import { setChats } from "@/entities/userchats/model/userchatsSlice.ts"
+import { firestore } from "@/main.tsx"
 import { useAppDispatch } from "@/shared/hooks"
-import { convertTimestampToTime } from "@/shared/lib/utils"
+import { convertTimestampToTime } from "@/shared/lib/utils.ts"
 import { doc, onSnapshot } from "firebase/firestore"
 import { useEffect } from "react"
 

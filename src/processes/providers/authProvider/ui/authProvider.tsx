@@ -3,7 +3,8 @@ import { getUserInfo } from "@/entities/user/model/userSliceThunk"
 import { auth, persistor } from "@/main"
 import { useAppDispatch, useAppSelector } from "@/shared/hooks"
 import { onAuthStateChanged, signOut } from "firebase/auth"
-import type { ReactNode } from "react"
+import { startAt } from "firebase/firestore"
+import { ReactNode, useLayoutEffect } from "react"
 import React, { createContext, useContext, useEffect, useState } from "react"
 
 interface AuthContextProps {
@@ -22,11 +23,12 @@ export const useAuth = () => {
 }
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-	const [currentUser, setCurrentUser] = useState<IUser | null>(null)
+	const { userInfo } = useAppSelector((state) => state.userReducer)
+	const [currentUser, setCurrentUser] = useState<IUser | null>(userInfo)
 	const { isLoading } = useAppSelector((state) => state.authReducer)
 	const dispatch = useAppDispatch()
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
 				setCurrentUser(user as IUser)

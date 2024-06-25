@@ -1,4 +1,5 @@
-import { useAppSelector, useChatMessages } from "@/shared/hooks"
+import { useChatMessages } from "@/hooks"
+import { useAppSelector } from "@/shared/hooks"
 import { Message } from "@/shared/ui"
 
 export const Messages = () => {
