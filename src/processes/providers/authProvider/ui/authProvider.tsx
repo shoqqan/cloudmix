@@ -2,10 +2,11 @@ import type { IUser } from "@/entities/user/model/types"
 import { getUserInfo } from "@/entities/user/model/userSliceThunk"
 import { auth, persistor } from "@/main"
 import { useAppDispatch, useAppSelector } from "@/shared/hooks"
+import { showErrorToast } from "@/shared/lib/toaster.ts"
 import { onAuthStateChanged, signOut } from "firebase/auth"
-import { startAt } from "firebase/firestore"
-import { ReactNode, useLayoutEffect } from "react"
-import React, { createContext, useContext, useEffect, useState } from "react"
+import type { ReactNode } from "react"
+import { useLayoutEffect } from "react"
+import React, { createContext, useContext, useState } from "react"
 
 interface AuthContextProps {
 	currentUser: IUser | null
@@ -44,14 +45,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 	if (isLoading) {
 		return (
 			<div className={"w-screen h-screen flex justify-center items-center"}>
-				<div className="w-12 h-12 rounded-full animate-spin border-8 border-dashed border-[#9969FF] border-t-transparent"></div>
+				<div className="w-12 h-12 rounded-full animate-spin border-8 border-dashed border-[#9969FF] border-t-transparent" />
 			</div>
 		)
 	}
 
 	const logout = () => {
-		signOut(auth).then(() => setCurrentUser(null))
-		persistor.purge()
+		try {
+			setCurrentUser(null)
+			signOut(auth)
+			persistor.purge()
+		} catch (e) {
+			showErrorToast(e)
+		}
 	}
 
 	return <AuthContext.Provider value={{ currentUser, logout }}>{children}</AuthContext.Provider>
